@@ -1,7 +1,12 @@
 #include <iostream>
 #include <stdlib.h>
 #include <queue>
+#include <chrono>
 using namespace std;
+
+using chrono::duration_cast;
+using chrono::high_resolution_clock;
+using chrono::milliseconds;
 
 class Node {
 public:
@@ -115,7 +120,14 @@ int main() {
 
     } while (ans == 'y' || ans == 'Y');
 
+    auto start = high_resolution_clock::now();
     bfs(root);
+    auto end = high_resolution_clock::now();
+
+    auto durations = duration_cast<milliseconds>(end - start);
+
+    cout << endl;
+    cout << "\nDurations: " << to_string(durations.count()) << " ms" << endl;
 
     return 0;
 }
